@@ -29,7 +29,7 @@ def actualizar_datos():
             instrument2.serial.close()
 
 # Funcion destinada a enviar los datos contenidos en data_dict
-# Utilizar función enviar_dict de archivo funciones
+# Utilizar función enviar_dict de archivo funciones dentro de enviar_datos
 
 def enviar_datos():
     while True:
