@@ -2,7 +2,7 @@ import minimalmodbus, serial, datetime, json
 
 # Puertos e IDs
 
-puerto = 'COM8'
+puerto = '/dev/ttyUSB0'
 id1 = 1
 id2 = 3
 
@@ -83,10 +83,18 @@ def vacio(keys):
 
 # Enviar diccionario
 
-def enviar_dict(ser, data_dict):
-    json_data = json.dumps(data_dict)
-    bytes_data = json_data.encode()
-    ser.write(bytes_data)
+def enviar_dict(ser:serial.Serial, data_dict:dict):
+    try: 
+        buffeSerial = ser.in_waiting 
+        jsonMsg = json.dumps(data_dict)
+        if buffeSerial > 0:
+            message = ser.read(buffeSerial).decode().rstrip()
+            if message == "Datos":
+                ser.write(jsonMsg.encode())
+                print("Enviando...")
+   
+    except Exception as e:
+        print('Error:', e)
 
 # Baudrate y timeout
 

@@ -1,8 +1,12 @@
-import time, threading, funciones
+import time, threading, funciones, serial
 
 # Se crea el diccionario
 
 data_dict = {}
+
+# Serial
+
+ser = serial.Serial(port='/tmp/COM10', baudrate=115200)
 
 # Se encarga de actualizar los datos de data_dict
 
@@ -33,8 +37,7 @@ def actualizar_datos():
 
 def enviar_datos():
     while True:
-        print(data_dict)
-        time.sleep(5)
+        funciones.enviar_dict(ser, data_dict)
 
 # Se crean los hilos
 
@@ -47,3 +50,4 @@ t2 = threading.Thread(target=enviar_datos)
 t1.start()
 
 t2.start()
+ 
