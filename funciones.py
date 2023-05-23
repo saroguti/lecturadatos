@@ -2,7 +2,9 @@ import minimalmodbus, serial, datetime, json
 
 # Puertos e IDs
 
-puerto = '/dev/ttyUSB0'
+# /dev/ttyUSB0
+
+puerto = 'COM8'
 id1 = 1
 id2 = 3
 
